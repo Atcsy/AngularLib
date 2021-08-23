@@ -2,8 +2,7 @@
   <div class="col-md-6">
     <div id="search-component">
       <label for="search-box">Seach for Books</label>
-      <input [(ngModel)]="searchTerm" />
+      <input type="text" (keyup)="onKeyDownSearch($event)" />
     </div>
-    {{ searchTerm }}
   </div>
 </div>

@@ -1,6 +1,8 @@
 <div class="row">
   <div class="col" style="background-color: aquamarine">
-    <app-product-search></app-product-search>
+    <app-product-search
+      (searchTermEvent)="searchTermEvent($event)"
+    ></app-product-search>
   </div>
   <div class="col" style="background-color: bisque">
     <p *ngIf="products.length < 1" class="no-book--error">
