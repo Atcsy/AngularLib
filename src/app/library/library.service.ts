@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, Input } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 import { IBook } from '../shared/models/book';
 import { IPagination } from '../shared/models/pagination';
@@ -9,7 +10,7 @@ import { IPagination } from '../shared/models/pagination';
   providedIn: 'root',
 })
 export class LibraryService {
-  baseUrl = 'http://localhost:5000/api/v1/';
+  baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
