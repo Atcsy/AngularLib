@@ -8,12 +8,15 @@ export class CartService {
   constructor() {}
 
   initLocalStorage() {
-    const initalCart = {
-      items: [],
-    };
+    const cart: Cart = this.getCart();
+    if (!cart) {
+      const initalCart = {
+        items: [],
+      };
 
-    const initalCartJson = JSON.stringify(initalCart);
-    localStorage.setItem('cart', initalCartJson);
+      const initalCartJson = JSON.stringify(initalCart);
+      localStorage.setItem('cart', initalCartJson);
+    }
   }
 
   getCart(): Cart {
@@ -22,9 +25,21 @@ export class CartService {
     return cart;
   }
 
-  setCartItem(CartItem: CartItem): Cart {
+  setCartItem(cartItem: CartItem): Cart {
     const cart = this.getCart();
-    cart.items?.push(CartItem);
+    const cartItemExist = cart.items?.find(
+      (item) => item.productId === cartItem.productId
+    );
+    if (cartItemExist) {
+      cart.items?.map((item) => {
+        if (item.productId === cartItem.productId) {
+          //What is the optimal solution here? Instead of !
+          item.quantity = item.quantity! + cartItem.quantity!;
+        }
+      });
+    } else {
+      cart.items?.push(cartItem);
+    }
     const cartJson = JSON.stringify(cart);
     localStorage.setItem('cart', cartJson);
     return cart;
