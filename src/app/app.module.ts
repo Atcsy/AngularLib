@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { LibraryModule } from './library/library.module';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { LibraryModule } from './library/library.module';
     HttpClientModule,
     CoreModule,
     LibraryModule,
+    HomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

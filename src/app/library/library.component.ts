@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IBook } from '../shared/models/book';
 import { LibraryService } from './library.service';
+import { delay, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-library',
@@ -14,14 +15,17 @@ export class LibraryComponent implements OnInit {
   constructor(private libraryService: LibraryService) {}
 
   searchTermEvent(search: any) {
-    this.libraryService.getPoducts(search).subscribe(
-      (response) => {
-        this.products = response.data;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.libraryService
+      .getPoducts(search)
+      .pipe(delay(1000), distinctUntilChanged())
+      .subscribe(
+        (response) => {
+          this.products = response.data;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
   ngOnInit(): void {
