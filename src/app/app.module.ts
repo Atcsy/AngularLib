@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { LibraryModule } from './library/library.module';
 import { HomeModule } from './home/home.module';
+import { CartModule } from './cart/cart.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { HomeModule } from './home/home.module';
     CoreModule,
     LibraryModule,
     HomeModule,
+    CartModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
