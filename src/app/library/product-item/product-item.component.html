@@ -1,17 +1,22 @@
 <div class="row d-flex justify-content-center mt-5 mb-5">
   <div class="col-md-6">
     <div class="card" style="width: 18rem">
-      <img
-        class="card-img-top"
-        src="https://www.mswordcoverpages.com/wp-content/uploads/2018/10/Book-cover-page-4-CRC.png"
-        alt="Card image cap"
-      />
+      <img class="card-img-top" src="/assets/img/book.png" alt="book image" />
       <div class="card-body">
         <h5 class="card-title">{{ product.title }}</h5>
         <p class="card-text">
           {{ product.author }}
         </p>
-        <a class="btn btn-primary" (click)="addProductToCart()">Add to cart</a>
+        <p class="card-text">
+          {{ product.genre }}
+        </p>
+        <button
+          [disabled]="addedTocart"
+          class="btn-primary btn"
+          (click)="addProductToCart()"
+        >
+          Add to cart
+        </button>
       </div>
     </div>
   </div>

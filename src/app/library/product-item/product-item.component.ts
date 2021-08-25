@@ -11,15 +11,17 @@ import { IPagination } from 'src/app/shared/models/pagination';
 })
 export class ProductItemComponent implements OnInit {
   @Input() product!: IBook;
+  addedTocart = false;
 
   constructor(private cartService: CartService) {}
 
   addProductToCart() {
     const cartItem: ICartItem = {
       productId: this.product._id,
+      title: this.product.title,
       quantity: 1,
     };
-
+    this.addedTocart = true;
     this.cartService.setCartItem(cartItem);
   }
 

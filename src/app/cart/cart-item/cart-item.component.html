@@ -1,0 +1,34 @@
+<div class="cart_items">
+  <ul class="cart_list">
+    <li class="cart_item clearfix">
+      <div class="cart_item_image">
+        <img src="/assets/img/book.png" alt="book image" />
+      </div>
+      <div
+        class="
+          cart_item_info
+          d-flex
+          flex-md-row flex-column
+          justify-content-between
+        "
+      >
+        <div class="cart_item_name cart_info_col">
+          <div class="cart_item_title">Name</div>
+          <div class="cart_item_text">{{ icart.title }}</div>
+        </div>
+        <div class="cart_item_quantity cart_info_col">
+          <div class="cart_item_title">Quantity</div>
+          <div class="cart_item_text">{{ icart.quantity }}</div>
+          <small>
+            <button
+              class="cart_button_delete btn-danger"
+              (click)="emitDeleteCartItemId(icart.productId)"
+            >
+              Delete
+            </button>
+          </small>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

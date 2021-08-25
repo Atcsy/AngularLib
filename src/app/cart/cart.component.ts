@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ICartItem } from '../shared/models/cart';
 import { CartService } from './cart.service';
 
 @Component({
@@ -7,6 +8,8 @@ import { CartService } from './cart.service';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
+  cartItemA: ICartItem[] = [];
+
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
@@ -15,7 +18,18 @@ export class CartComponent implements OnInit {
 
   _getCartDetails() {
     this.cartService.cart$.pipe().subscribe((cart) => {
-      cart.items?.forEach((cartItem) => console.log(cartItem));
+      this.cartItemA = [];
+      cart.items?.forEach((cartItem) => {
+        this.cartItemA.push({
+          productId: cartItem.productId,
+          title: cartItem.title,
+          quantity: cartItem.quantity,
+        });
+      });
     });
+  }
+
+  getDeleteCartItemId(cartItemId: string) {
+    this.cartService.deleteCartItem(cartItemId);
   }
 }

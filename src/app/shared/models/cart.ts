@@ -4,5 +4,6 @@ export interface ICart {
 
 export interface ICartItem {
   productId?: string;
+  title?: string;
   quantity?: number;
 }
