@@ -1,8 +1,11 @@
 <div class="row d-flex justify-content-center mt-5">
   <div class="col-md-6">
     <div id="search-component">
-      <label for="search-box">Seach for Books</label>
-      <input type="text" (keyup)="onKeyDownSearch($event)" />
+      <input
+        type="text"
+        placeholder="search"
+        (keyup)="onKeyDownSearch($event)"
+      />
     </div>
   </div>
 </div>

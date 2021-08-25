@@ -1,10 +1,10 @@
-<div class="row">
-  <div class="col" style="background-color: aquamarine">
+<div class="row library-component">
+  <div class="col search-column">
     <app-product-search
       (searchTermEvent)="searchTermEvent($event)"
     ></app-product-search>
   </div>
-  <div class="col" style="background-color: bisque">
+  <div class="col">
     <p *ngIf="products.length < 1" class="no-book--error">
       No Books, Please use another search term
     </p>
