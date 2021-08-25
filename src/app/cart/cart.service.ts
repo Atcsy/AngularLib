@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Cart, CartItem } from '../shared/models/cart';
+import { ICart, ICartItem } from '../shared/models/cart';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  cart$: BehaviorSubject<Cart> = new BehaviorSubject(this.getCart());
+  cart$: BehaviorSubject<ICart> = new BehaviorSubject(this.getCart());
 
   constructor() {}
 
   initLocalStorage() {
-    const cart: Cart = this.getCart();
+    const cart: ICart = this.getCart();
     if (!cart) {
       const initalCart = {
         items: [],
@@ -22,12 +22,12 @@ export class CartService {
     }
   }
 
-  getCart(): Cart {
+  getCart(): ICart {
     const cart = JSON.parse(localStorage.getItem('cart')!);
     return cart;
   }
 
-  setCartItem(cartItem: CartItem): Cart {
+  setCartItem(cartItem: ICartItem): ICart {
     const cart = this.getCart();
 
     const cartItemExist = cart.items?.find(

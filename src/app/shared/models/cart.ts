@@ -1,8 +1,8 @@
-export interface Cart {
-  items?: CartItem[];
+export interface ICart {
+  items?: ICartItem[];
 }
 
-export interface CartItem {
+export interface ICartItem {
   productId?: string;
   quantity?: number;
 }

@@ -15,7 +15,7 @@ export class CartComponent implements OnInit {
 
   _getCartDetails() {
     this.cartService.cart$.pipe().subscribe((cart) => {
-      console.log('cart' + cart);
+      cart.items?.forEach((cartItem) => console.log(cartItem));
     });
   }
 }

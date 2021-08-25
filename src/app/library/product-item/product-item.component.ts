@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CartService } from 'src/app/cart/cart.service';
 import { IBook } from 'src/app/shared/models/book';
-import { CartItem } from 'src/app/shared/models/cart';
+import { ICartItem } from 'src/app/shared/models/cart';
 import { IPagination } from 'src/app/shared/models/pagination';
 
 @Component({
@@ -15,7 +15,7 @@ export class ProductItemComponent implements OnInit {
   constructor(private cartService: CartService) {}
 
   addProductToCart() {
-    const cartItem: CartItem = {
+    const cartItem: ICartItem = {
       productId: this.product._id,
       quantity: 1,
     };
