@@ -12,6 +12,7 @@ import { IPagination } from 'src/app/shared/models/pagination';
 export class ProductItemComponent implements OnInit {
   @Input() product!: IBook;
   addedTocart = false;
+  buttonText = 'Add To Cart';
 
   constructor(private cartService: CartService) {}
 
@@ -22,6 +23,7 @@ export class ProductItemComponent implements OnInit {
       quantity: 1,
     };
     this.addedTocart = true;
+    this.buttonText = 'Added To Cart';
     this.cartService.setCartItem(cartItem);
   }
 
