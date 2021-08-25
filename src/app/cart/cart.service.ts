@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Cart, CartItem } from '../shared/models/cart';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
+  // cart$: BehaviorSubject<Cart> = new BehaviorSubject(this.getCart());
+  cart$: Subject<Cart> = new Subject();
+
   constructor() {}
 
   initLocalStorage() {
     const cart: Cart = this.getCart();
+    // console.log('init:' + cart);
     if (!cart) {
       const initalCart = {
         items: [],
@@ -20,13 +25,16 @@ export class CartService {
   }
 
   getCart(): Cart {
-    const cartJsonString: string = localStorage.getItem('cart') || '{}';
-    const cart: Cart = JSON.parse(cartJsonString || '{}');
+    const cartJsonString = localStorage.getItem('cart') || '{"items":[]}';
+    console.log('jsonstring' + cartJsonString);
+    const cart: Cart = JSON.parse(cartJsonString);
+    console.log('jsonparse:' + cart);
     return cart;
   }
 
   setCartItem(cartItem: CartItem): Cart {
     const cart = this.getCart();
+
     const cartItemExist = cart.items?.find(
       (item) => item.productId === cartItem.productId
     );
@@ -42,6 +50,8 @@ export class CartService {
     }
     const cartJson = JSON.stringify(cart);
     localStorage.setItem('cart', cartJson);
+    this.cart$.next(cart);
+
     return cart;
   }
 }
