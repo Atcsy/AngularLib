@@ -6,9 +6,12 @@ import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'library', component: LibraryComponent },
+  {
+    path: 'library',
+    loadChildren: () =>
+      import('./library/library.module').then((mod) => mod.LibraryModule),
+  },
   { path: 'cart', component: CartComponent },
-  { path: 'library/:id', component: LibraryComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
