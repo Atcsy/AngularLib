@@ -1,35 +1,41 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IBook } from '../shared/models/book';
 import { LibraryService } from './library.service';
-import { delay, distinctUntilChanged } from 'rxjs/operators';
+import { distinctUntilChanged, debounceTime } from 'rxjs/operators';
+import { FormGroup, FormControl, FormGroupDirective } from '@angular/forms';
 
 @Component({
   selector: 'app-library',
   templateUrl: './library.component.html',
   styleUrls: ['./library.component.scss'],
+  providers: [FormGroupDirective],
 })
 export class LibraryComponent implements OnInit {
   products: IBook[] = [];
-  searchTerm: string = '';
+  searchForm!: FormGroup;
+  blankSearchTerm: string = '';
 
   constructor(private libraryService: LibraryService) {}
 
-  searchTermEvent(search: any) {
-    this.libraryService
-      .getPoducts(search)
-      .pipe(delay(1000), distinctUntilChanged())
-      .subscribe(
-        (response) => {
-          this.products = response.data;
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-  }
-
   ngOnInit(): void {
-    this.libraryService.getPoducts(this.searchTerm).subscribe(
+    this.searchForm = new FormGroup({
+      searchField: new FormControl(),
+    });
+
+    this.searchForm.valueChanges
+      .pipe(debounceTime(300), distinctUntilChanged())
+      .subscribe((result) => {
+        this.libraryService.getPoducts(result.searchField).subscribe(
+          (response) => {
+            this.products = response.data;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      });
+    //this will get back the all of the products
+    this.libraryService.getPoducts(this.blankSearchTerm).subscribe(
       (response) => {
         this.products = response.data;
       },

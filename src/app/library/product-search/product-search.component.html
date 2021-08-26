@@ -1,11 +1,13 @@
 <div class="row d-flex justify-content-center mt-5">
   <div class="col-md-6">
-    <div id="search-component">
-      <input
-        type="text"
-        placeholder="search"
-        (keyup)="onKeyDownSearch($event)"
-      />
-    </div>
+    <ng-container [formGroup]="form">
+      <div id="search-component">
+        <input
+          formControlName="searchField"
+          type="text"
+          placeholder="Search here..."
+        />
+      </div>
+    </ng-container>
   </div>
 </div>

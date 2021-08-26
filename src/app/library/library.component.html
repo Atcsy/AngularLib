@@ -1,8 +1,8 @@
 <div class="row library-component">
   <div class="col search-column">
-    <app-product-search
-      (searchTermEvent)="searchTermEvent($event)"
-    ></app-product-search>
+    <ng-container [formGroup]="searchForm">
+      <app-product-search></app-product-search>
+    </ng-container>
   </div>
   <div class="col">
     <p *ngIf="products.length < 1" class="no-book--error">

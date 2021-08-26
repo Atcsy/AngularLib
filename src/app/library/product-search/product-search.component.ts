@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { IBook } from 'src/app/shared/models/book';
-import { IPagination } from 'src/app/shared/models/pagination';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormGroupDirective } from '@angular/forms';
 
 @Component({
   selector: 'app-product-search',
@@ -8,14 +7,11 @@ import { IPagination } from 'src/app/shared/models/pagination';
   styleUrls: ['./product-search.component.scss'],
 })
 export class ProductSearchComponent implements OnInit {
-  @Output() searchTermEvent = new EventEmitter();
-  @Input() product!: IBook;
+  form!: FormGroup;
 
-  constructor() {}
+  constructor(private rootFormGroup: FormGroupDirective) {}
 
-  onKeyDownSearch(event: any) {
-    this.searchTermEvent.emit(event.target.value);
+  ngOnInit(): void {
+    this.form = this.rootFormGroup.control;
   }
-
-  ngOnInit(): void {}
 }
