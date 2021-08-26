@@ -5,7 +5,8 @@
     </ng-container>
   </div>
   <div class="col">
-    <p *ngIf="products.length < 1" class="no-book--error">
+    <p *ngIf="loading === true" class="no-book--error">Loading ...</p>
+    <p *ngIf="loading === false && products.length < 1" class="no-book--error">
       No Books, Please use another search term
     </p>
     <div *ngFor="let item of products" class="text-center">

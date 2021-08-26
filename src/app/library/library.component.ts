@@ -14,6 +14,7 @@ export class LibraryComponent implements OnInit {
   products: IBook[] = [];
   searchForm!: FormGroup;
   blankSearchTerm: string = '';
+  loading = true;
 
   constructor(private libraryService: LibraryService) {}
 
@@ -37,9 +38,11 @@ export class LibraryComponent implements OnInit {
     //this will get back the all of the products
     this.libraryService.getPoducts(this.blankSearchTerm).subscribe(
       (response) => {
+        this.loading = false;
         this.products = response.data;
       },
       (error) => {
+        this.loading = false;
         console.log(error);
       }
     );
